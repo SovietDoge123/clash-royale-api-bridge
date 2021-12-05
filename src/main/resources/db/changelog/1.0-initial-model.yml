@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1.0-initial-model.yml
+      logicalFilePath: 1.0-initial-model.yml
+      author: Zac Miller
+      changes:
+        - tagDatabase:
+            tag: initial-model
+        - createTable:
+            tableName: card
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: nvarchar(255)
