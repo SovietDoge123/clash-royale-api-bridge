@@ -20,6 +20,8 @@ import org.springframework.web.util.UriComponentsBuilder
 @Service
 class ClashRoyaleClient {
 
+    //Comment to commit
+
     @Autowired
     CardRepository cardRepository
 
