@@ -10,21 +10,17 @@ import javax.persistence.Table
 import javax.validation.constraints.NotNull
 
 @Entity
-@Table(name = "match")
-class Match {
+@Table(name = "card_ref")
+class CardRef {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id
 
     @NotNull
-    @Column(name = "type")
-    String type
+    @Column(name = "name")
+    String name
 
-    @OneToMany(mappedBy = "match")
-    List<Player> team
-
-    @OneToMany(mappedBy = "match")
-    List<Player> opponent
-
+    @OneToMany
+    List<Card> cards
 }

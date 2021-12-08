@@ -1,4 +1,4 @@
-package com.example
+package com.example.repository
 
 import com.example.entities.Card
 import org.springframework.data.jpa.repository.JpaRepository

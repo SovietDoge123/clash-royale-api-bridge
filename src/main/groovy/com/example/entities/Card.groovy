@@ -4,7 +4,7 @@ import javax.persistence.*
 import javax.validation.constraints.NotNull
 
 @Entity
-@Table(name = 'card')
+@Table(name = "card")
 class Card {
 
     @Id
@@ -12,6 +12,14 @@ class Card {
     Integer id
 
     @NotNull
-    @Column(name = 'name')
+    @Column(name = "name")
     String name
+
+    @ManyToOne
+    @JoinColumn(name = "card_ref_id")
+    CardRef cardRef
+
+    @ManyToOne
+    @JoinColumn(name = "player_id")
+    Player player
 }
