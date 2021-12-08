@@ -25,21 +25,12 @@ class ClashRoyaleClient {
     @Autowired
     CardRepository cardRepository
 
-    final String authToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImZmZTYyN2FkLWNkMzAtNDYwOC1hZDhjLWJjYzNjODdjZDA4YyIsImlhdCI6MTYzODcyNzU3NCwic3ViIjoiZGV2ZWxvcGVyL2M4NzNjZmRhLWE2MjQtZTU2ZC03MjBhLWQwNGFhMTk5MDIxMCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI3MS44Ny41MS44OCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.2GiiaspkYTf4bkyQTEQB6y64FarnmDJqmOmST8owvTjtF1ot_mfnAoZFxwn1_YHU0YOUkt9u4XVlsnOZKBcG4w"
+    final String authToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImU0ZmUyNTcyLTg4MmQtNDA2Mi1hZmY2LWExMzYxNGIwOTFhZSIsImlhdCI6MTYzODkzMTA2Niwic3ViIjoiZGV2ZWxvcGVyL2M4NzNjZmRhLWE2MjQtZTU2ZC03MjBhLWQwNGFhMTk5MDIxMCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxOTIuMTQ5LjI0NS4xNjciXSwidHlwZSI6ImNsaWVudCJ9XX0.uaxqMR4SFck7JTxTCOHro3Jp_qvAGfu6DgShifFCck_j1svoqrWgSuXc81jCx8m9EUOqfLJSaL9jN_s2uo0glw"
     final HttpHeaders headers = new HttpHeaders()
-
-/*    void getCards() {
-        RestTemplate restTemplate = new RestTemplate()
-        String topClanUrl = 'https://api.clashroyale.com/v1/cards'
-        headers.add("Authorization", "Bearer ${authToken}")
-        ResponseEntity<CardItems> response = restTemplate.exchange(topClanUrl, HttpMethod.GET, new HttpEntity<Object>(headers), CardItems)
-        cardRepository.saveAll(response.body.items)
-        getTopClans()
-    }*/
 
     void getTopClans() {
         RestTemplate restTemplate = new RestTemplate()
-        String topClanUrl = 'https://api.clashroyale.com/v1/clans?minScore=72229&limit=50'
+        String topClanUrl = 'https://api.clashroyale.com/v1/clans?minScore=64000&limit=50'
         headers.add("Authorization", "Bearer ${authToken}")
         ResponseEntity<ClanItems> response = restTemplate.exchange(topClanUrl, HttpMethod.GET, new HttpEntity<Object>(headers), ClanItems)
 
@@ -88,5 +79,14 @@ class ClashRoyaleClient {
         response.body.each {
             log.info(it.type)
         }
+    }
+
+    void getCards() {
+        RestTemplate restTemplate = new RestTemplate()
+        String topClanUrl = 'https://api.clashroyale.com/v1/cards'
+        headers.add("Authorization", "Bearer ${authToken}")
+        ResponseEntity<CardItems> response = restTemplate.exchange(topClanUrl, HttpMethod.GET, new HttpEntity<Object>(headers), CardItems)
+        cardRepository.saveAll(response.body.items)
+        getTopClans()
     }
 }

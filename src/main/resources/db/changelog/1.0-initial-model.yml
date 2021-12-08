@@ -19,3 +19,16 @@ databaseChangeLog:
               - column:
                   name: name
                   type: nvarchar(255)
+        - createTable:
+            tableName: match
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: type
+                  type: nvarchar(100)
